@@ -33,3 +33,14 @@ db.clients_oauth.updateMany(
 {},
 { $addToSet: { 'roles.one_of': "basic" } }
 )
+
+// find when size equal
+db.clients_oauth.find(
+  {"roles.all_of": { $exists: true, $size: 2} }
+);
+
+// update when array has one particular element
+db.clients_oauth.updateMany(
+  {"roles.all_of": { $exists: true, $size: 1, $in: ["customer"]}},
+  {$set: {"roles.all_of": []}}
+);
