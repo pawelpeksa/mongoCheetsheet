@@ -73,3 +73,19 @@ db.myCollection.updateMany(
   {"roles.one_of": { $exists: true, $in: ["romek"]}},
   { $addToSet: { 'roles.one_of':  "Tomek"  } }
 );
+
+
+// query by time 
+
+db.SessionData.find({
+
+created_at: {
+        $gt: ISODate("2010-04-29T00:00:00.000Z"),
+        $lt: ISODate("2020-05-01T00:00:00.000Z")
+    }
+
+
+})
+   .projection({})
+   .sort({_id:-1})
+   .limit(100)
