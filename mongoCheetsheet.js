@@ -89,3 +89,17 @@ created_at: {
    .projection({})
    .sort({_id:-1})
    .limit(100)
+
+
+
+// sort by number of elements in array:
+
+   db.catalogs.aggregate([
+    {
+        $project : { products_count: {$size: { "$ifNull": [ "$product_ids", [] ] } } }
+    }, 
+    {   
+        $sort: {"products_count":-1} 
+        
+    }
+    ])
