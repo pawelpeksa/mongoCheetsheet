@@ -103,3 +103,19 @@ created_at: {
         
     }
     ])
+
+
+
+// count user with consents
+db.UserData.find(
+    {$or:[
+    { "data.dataForRecommendationAndFootwear": { $exists: true, $ne: null } },
+    { "data.dataForResearchAmdImprovements": { $exists: true, $ne: null } }
+    ]
+    }
+    
+    )
+   .projection({})
+   .sort({_id:-1})
+   .count()
+
