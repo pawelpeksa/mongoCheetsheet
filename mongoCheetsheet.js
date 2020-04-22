@@ -129,3 +129,9 @@ db.UserData.find(
 .sort({_id:-1})
 .count()
 
+// remove element from array
+db.products.update(
+  { _id: id },
+  { $pull: { 'body.attributes': { key: 'size_range_steps' } } }
+);
+
